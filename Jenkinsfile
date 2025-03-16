@@ -22,7 +22,7 @@ pipeline {
             }
         }
         */
-        
+
         stage('Test'){
             parallel {
                 stage('Unit test') {
@@ -58,7 +58,7 @@ pipeline {
                         sh '''
                             npm install serve
                             node_modules/.bin/serve -s build &
-                            sleep 10
+                            sleep 30
                             npx playwright test 
                         '''
                     }
