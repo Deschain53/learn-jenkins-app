@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     stages {
-        /*
-
+        
         stage('Build') {
             agent {
                 docker {
@@ -22,8 +21,7 @@ pipeline {
                 '''
             }
         }
-        */
-
+        
         stage('Test') {
             agent {
                 docker {
@@ -31,11 +29,12 @@ pipeline {
                     reuseNode true
                 }
             }
-
             steps {
                 sh '''
-                    #test -f build/index.html
-                    npm test
+                    echo 'Test stage'
+                    test -f build/index.html
+                    npm ci
+                    npm run test
                 '''
             }
         }
@@ -47,16 +46,16 @@ pipeline {
                     reuseNode true
                 }
             }
-
             steps {
                 sh '''
                     npm install serve
                     node_modules/.bin/serve -s build &
                     sleep 10
-                    npx playwright test
+                    npx playwright test 
                 '''
             }
         }
+
     }
 
     post {
@@ -64,4 +63,5 @@ pipeline {
             junit 'jest-results/junit.xml'
         }
     }
+
 }
