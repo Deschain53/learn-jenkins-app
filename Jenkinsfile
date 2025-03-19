@@ -63,7 +63,7 @@ pipeline {
                         sh '''
                             npm install serve
                             sleep 10
-                            node_modules/serve -s build &
+                            node_modules/.bin/serve -s build &
                             npx playwright test  --reporter=html
                         '''
                     }
