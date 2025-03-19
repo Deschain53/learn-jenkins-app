@@ -103,7 +103,7 @@ pipeline {
             }
 
             environment {
-                CI_ENVIRONMENT_URL = https://brilliant-longma-c48432.netlify.app
+                CI_ENVIRONMENT_URL = 'https://brilliant-longma-c48432.netlify.app'
             }
 
             steps {
