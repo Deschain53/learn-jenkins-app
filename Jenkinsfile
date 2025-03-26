@@ -4,7 +4,6 @@ pipeline {
     environment {
         NETLIFY_SITE_ID = 'c7b78bf6-e0f8-4308-814b-895fc91ffe8e'
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
-        REACT_APP_VERSION = "1.0.${BUILD_ID}"
     }
 
     stages {
@@ -24,7 +23,6 @@ pipeline {
             }
             steps {
                 sh '''
-                    echo 'Small change' 
                     ls -la
                     node --version
                     npm --version
@@ -47,7 +45,6 @@ pipeline {
                     }
                     steps {
                         sh '''
-                            echo 'Test stage'
                             test -f build/index.html
                             npm ci
                             npm run test
@@ -70,7 +67,7 @@ pipeline {
                     steps {
                         sh '''
                             serve -s build &
-                            sleep 60
+                            sleep 20
                             npx playwright test  --reporter=html
                         '''
                     }
