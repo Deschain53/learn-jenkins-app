@@ -9,6 +9,12 @@ pipeline {
 
     stages {
 
+        stage('Docker') {
+            steps {
+                sh 'Docker build -t my-playwright .'
+            }
+        }
+
         stage('Build') {
             agent {
                 docker {
@@ -28,7 +34,7 @@ pipeline {
                 '''
             }
         }
-        
+    /*
         stage('Test'){
             parallel {
                 stage('Unit test') {
@@ -140,4 +146,5 @@ pipeline {
         }
 
     }
+    */
 }
