@@ -70,7 +70,7 @@ pipeline {
                     steps {
                         sh '''
                             npm install serve
-                            sleep 60
+                            sleep 40
                             serve -s build &
                             npx playwright test  --reporter=html
                         '''
