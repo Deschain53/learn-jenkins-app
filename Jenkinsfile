@@ -34,7 +34,8 @@ pipeline {
                 '''
             }
         }
-    /*
+
+        /*
         stage('Test'){
             parallel {
                 stage('Unit test') {
@@ -144,7 +145,7 @@ pipeline {
                 }
             }
         }
-
+        */
     }
-    */
+    
 }
