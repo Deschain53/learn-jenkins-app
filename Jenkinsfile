@@ -2,13 +2,16 @@ pipeline {
     agent any
 
     environment {
+        AWS_DEFAULT_REGION = 'us-east-2'
+/*        
         NETLIFY_SITE_ID = 'c7b78bf6-e0f8-4308-814b-895fc91ffe8e'
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
-
+*/
     }
 
     stages {
 
+        /*
         stage('Build') {
             agent {
                 docker {
@@ -18,7 +21,7 @@ pipeline {
             }
             steps {
                 sh '''
-                    ls -la
+                    ls -la                  
                     node --version
                     npm --version
                     npm ci
@@ -27,8 +30,9 @@ pipeline {
                 '''
             }
         }
+        */
 
-        stage('AWS'){
+        stage('Deploy to AWS'){
             agent {
                 docker {
                     image 'amazon/aws-cli:2.25.5'
@@ -36,20 +40,25 @@ pipeline {
                     reuseNode true
                 }
             }
-            environment {
+            /*environment {
                 AWS_S3_BUCKET = 'learn-jenkins-20250327-2000'
             }
-
+            */
             steps {
                 withCredentials([usernamePassword(credentialsId: 'my-aws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
                 sh '''
                     aws --version
-                    aws s3 sync build s3://$AWS_S3_BUCKET
+                    # aws s3 sync build s3://$AWS_S3_BUCKET
+                    aws ecs register-task-definition --cli-input-json file://aws/task-definition-prod.json
                 '''
                 }
             }
         }
-        
+
+
+
+
+    /*        
         stage('Test'){
             parallel {
                 stage('Unit test') {
@@ -154,8 +163,8 @@ pipeline {
                     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Prod E2E', reportTitles: '', useWrapperFileDirectly: true])
                 }
             }
-        }
-        
+        }        
+    */   
+
     }
-    
 }
