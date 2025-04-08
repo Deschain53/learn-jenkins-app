@@ -5,7 +5,7 @@ pipeline {
         AWS_DEFAULT_REGION = 'us-east-2'
         AWS_ECS_CLUSTER = 'LearnJenkinsApp-Cluster-Prod'
         AWS_ECS_SERVICE_PROD = 'LearnJenkinsApps-TaskDefinition-Prod'
-        AWS_ECS_TD_PROD = 'LearnJenkinsApp-TaskDefinition-Prod '
+        AWS_ECS_TD_PROD = 'LearnJenkinsApp-TaskDefinition-Prod'
 /*        
         NETLIFY_SITE_ID = 'c7b78bf6-e0f8-4308-814b-895fc91ffe8e'
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
